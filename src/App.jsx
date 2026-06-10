@@ -21,7 +21,7 @@ function App() {
       <section className="section">
         <h3>About</h3>
         <p>
-          I am a Full Stack JavaScript Developer with around 5 years of
+          I am a Full Stack JavaScript Developer with around 5+ years of
           experience building production web and mobile applications across
           SaaS platforms, LMS systems, workflow tools, dashboards, APIs, and
           data visualization products.
@@ -65,29 +65,53 @@ function App() {
       </section>
 
       <section className="section" id="projects">
-        <h3>Selected work</h3>
-        <div className="grid">
-          {projects.map((project) => (
-            <article className="card" key={project.title}>
+      <h3>Selected work</h3>
+      <div className="grid">
+        {projects.map((project) => (
+          <article className="card" key={project.title}>
+            <div className="cardTop">
               <p className="type">{project.type}</p>
-              <h4>{project.title}</h4>
-              <p>{project.description}</p>
+              {project.isPrivate && <span className="badge">Private work</span>}
+            </div>
 
-              <ul>
-                {project.points.map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
-              </ul>
+            <h4>{project.title}</h4>
+            <p>{project.description}</p>
 
-              <div className="tech">
-                {project.tech.map((item) => (
-                  <span key={item}>{item}</span>
-                ))}
+            <ul>
+              {project.points.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
+
+            <div className="tech">
+              {project.tech.map((item) => (
+                <span key={item}>{item}</span>
+              ))}
+            </div>
+
+            {(project.liveUrl || project.companyUrl || project.note) && (
+              <div className="projectFooter">
+                <div className="projectLinks">
+                  {project.liveUrl && (
+                    <a href={project.liveUrl} target="_blank" rel="noreferrer">
+                      {project.ctaLabel || "View Project"}
+                    </a>
+                  )}
+
+                  {project.companyUrl && (
+                    <a href={project.companyUrl} target="_blank" rel="noreferrer">
+                      Company Page
+                    </a>
+                  )}
+                </div>
+
+                {project.note && <p className="projectNote">{project.note}</p>}
               </div>
-            </article>
-          ))}
-        </div>
-      </section>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
 
       <section className="section contact">
         <h3>Contact</h3>
